@@ -204,7 +204,6 @@ Disadvantages
 **Hamming code**
 
 ![Alt text](Hamming.png)
-
 **Network Layer – Layer 3**
 
 - It determines the best path to move data from source to the destination based on the network conditions, the priority of service, and other factors.
@@ -278,6 +277,136 @@ This layer is responsible for the establishment of connection, maintenance of se
 **OSI-VS-TCP/IP**
 
 ![Alt text](OSI-vs-TCP-vs-Hybrid-2.webp)
+
+
+**Multiple Access Control** 
+
+If there is a dedicated link between the sender and the receiver then data link control layer is sufficient, however if there is no dedicated link present then multiple stations can access the channel simultaneously.
+
+![Alt text](2-44.jpg)
+
+**Random Access Protocol**
+
+- all the station has the equal priority to send the data over a channel.
+
+- Any station can send data depending on medium’s state( idle or busy).
+
+- There is no fixed sequence of stations sending data
+
+- if more than one station sends the data over a channel, there may be a collision or data conflict. Due to the collision, the data frame packets may be lost or changed
+
+The Random access protocols are further subdivided as: 
+
+1. **ALOHA**
+
+multiple stations can transmit data at the same time and can hence lead to collision and data being garbled. 
+
+- **Pure Aloha**
+
+When a station sends data it waits for an acknowledgement. If the acknowledgement doesn’t come within the allotted time then the station waits for a random amount of time called back-off time (Tb) and re-sends the data. Since different stations wait for different amount of time, the probability of further collision decreases. 
+
+```Vulnerable Time = 2* Frame transmission time
+Throughput =  G exp{-2*G}
+Maximum throughput = 0.184 for G=0.5
+```
+
+- **Slotted Aloha**
+
+It is similar to pure aloha, except that we divide time into slots and sending of data is allowed only at the beginning of these slots. If a station misses out the allowed time, it must wait for the next slot. This reduces the probability of collision. 
+
+```
+Vulnerable Time =  Frame transmission time
+Throughput =  G exp{-*G}
+Maximum throughput = 0.368 for G=1
+```
+
+2. **CSMA – Carrier Sense Multiple Access**
+
+- the station is required to first sense the medium (for idle or busy) before transmitting data. If it is idle then it sends data, otherwise it waits till the channel becomes idle. 
+
+- However there is still chance of collision in CSMA due to propagation delay.
+
+**CSMA access modes-**
+
+- 1-persistent: The node senses the channel, if idle it sends the data, otherwise it continuously keeps on checking the medium for being idle and transmits unconditionally(with 1 probability) as soon as the channel gets idle.
+
+- Non-Persistent: The node senses the channel, if idle it sends the data, otherwise it checks the medium after a random amount of time (not continuously) and transmits when found idle. 
+
+- P-persistent: The node senses the medium, if idle it sends the data with p probability. If the data is not transmitted ((1-p) probability) then it waits for some time and checks the medium again, now if it is found idle then it send with p probability. This repeat continues until the frame is sent. It is used in Wifi and packet radio systems. 
+
+- O-persistent: Superiority of nodes is decided beforehand and transmission occurs in that order. If the medium is idle, node waits for its time slot to send data.
+
+3. **CSMA/ CD**
+
+- It first senses the shared channel before broadcasting the frames, and if the channel is idle, it transmits a frame to check whether the transmission was successful. If the frame is successfully received, the station sends another frame. If any collision is detected in the CSMA/CD, the station sends a jam/ stop signal to the shared channel to terminate data transmission. After that, it waits for a random time before sending a frame to a channel.
+
+**CSMA/ CA**
+
+When a data frame is sent to a channel, it receives an acknowledgment to check whether the channel is clear. If the station receives only a single (own) acknowledgments, that means the data frame has been successfully transmitted to the receiver. But if it gets two signals (its own and one more in which the collision of frames), a collision of the frame occurs in the shared channel. Detects the collision of the frame when a sender receives an acknowledgment signal.
+
+CSMA/CA avoids collision by: 
+
+- Interframe space – Station waits for medium to become idle and if found idle it does not immediately send data (to avoid collision due to propagation delay) rather it waits for a period of time called Interframe space or IFS. After this time it again checks the medium for being idle. 
+
+-  Contention window: the total time is divided into different slots. When the station/ sender is ready to transmit the data frame, it chooses a random slot number of slots as wait time. If the channel is still busy, it does not restart the entire process, except that it restarts the timer only to send data packets when the channel is inactive.
+
+- Acknowledgement – The sender re-transmits the data if acknowledgement is not received before time-out.
+
+**Channelization**
+
+- **Frequency Division Multiple Access (FDMA)** – The available bandwidth is divided into equal bands so that each station can be allocated its own band. Guard bands are also added so that no two bands overlap to avoid crosstalk and noise. 
+
+- **Time Division Multiple Access (TDMA)** – In this, the bandwidth is shared between multiple stations. To avoid collision time is divided into slots and stations are allotted these slots to transmit data. However there is a overhead of synchronization as each station needs to know its time slot. This is resolved by adding synchronization bits to each slot. Another issue with TDMA is propagation delay which is resolved by addition of guard bands. 
+
+- **Code Division Multiple Access (CDMA)** – One channel carries all transmissions simultaneously. There is neither division of bandwidth nor division of time. 
+
+
+**Controlled Access Protocols**
+
+**Reservation**
+
+- In the reservation method, a station needs to make a reservation before sending data
+
+- If there are M stations, the reservation interval is divided into M slots, and each station has one slot.
+
+- The stations which have reserved their slots transfer their frames in that order.
+
+- After data transmission period, next reservation interval begins.
+
+- Since everyone agrees on who goes next, there will never be any collisions.
+
+**Polling**
+
+- In this, one acts as a primary station(controller) and the others are secondary stations. All data exchanges must be made through the controller.
+
+- The message sent by the controller contains the address of the node being selected for granting access.
+
+- Although all nodes receive the message the addressed one responds to it and sends data if any. If there is no data, usually a “poll reject”(NAK) message is sent back.
+
+``` Efficiency = Tt/(Tt + Tpoll)
+where Tpoll be the time for polling and Tt be the time for transmission of data.
+```
+
+**Token Passing**
+
+- In token passing scheme, the stations are connected logically to each other in form of ring and access to stations is governed by tokens.
+
+- A token is a special bit pattern or a small message, which circulate from one station to the next in some predefined order.
+
+- when a node receive a token,it hold onto the token only if it has some frames to transmit; otherwise it immediately forward the token to the next node.
+
+-  if a node have frames to transmit when it receive the token,it sends up to a maximum number of frames and then forward the token to the next node.
+
+- There exists problems like duplication of token or token is lost or insertion of new station, removal of a station, which need be tackled for correct and reliable operation of this scheme
+
+```
+The average time (delay) required to send a token to the next station = a/N.
+Throughput, S = 1/(1 + a/N) for a<1 
+S = 1/{a(1 + 1/N)} for a>1.  
+       where N = number of stations
+             a = Tp/Tt 
+(Tp = propagation delay and Tt = transmission delay)
+```
 
 ## Flow Control
 
