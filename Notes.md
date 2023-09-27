@@ -141,6 +141,70 @@ Media Access Control Layer
 
 ```Switch & Bridge are Data Link Layer devices.```
 
+### Error Detection and Recovery
+
+Error is a condition when the receiver’s information does not match the sender’s information.
+
+**Types of Errors**
+
+**Single-Bit Error**
+
+- It occurs when one bit (i.e., a single binary digit) of a transmitted data unit is altered during transmission, resulting in an incorrect or corrupted data unit.
+
+**Burst Error**
+
+- When several consecutive bits are flipped mistakenly in digital transmission, it creates a burst error. This error causes a sequence of consecutive incorrect values.
+
+**Error Detection Methods**
+
+Simple Parity Check
+
+Simple-bit parity is a simple error detection method that involves adding an extra bit to a data transmission. It works as:
+
+- 1 is added to the block if it contains an odd number of 1’s, and
+
+- 0 is added if it contains an even number of 1’s
+
+![Alt text](detect12.jpg)
+
+
+Disadvantages
+
+- Single Parity check is not able to detect even no. of bit error. 
+
+**Checksum**
+
+Checksum – Operation at Sender’s Side
+
+- Firstly, the data is divided into k segments each of m bits.
+
+- On the sender’s end, the segments are added using 1’s complement arithmetic to get the sum. The sum is complemented to get the checksum.
+
+- The checksum segment is sent along with the data segments.
+
+Checksum – Operation at Receiver’s Side
+
+- At the receiver’s end, all received segments are added using 1’s complement arithmetic to get the sum. The sum is complemented.
+
+- If the result is zero, the received data is accepted; otherwise discarded
+
+Disadvantages
+
+- If one or more bits of a segment are damaged and the corresponding bit or bits of opposite value in a second segment are also damaged.
+
+
+![Alt text](<Screenshot 2023-09-27 172048.png>)
+
+**Cyclic Redundancy Check (CRC)**
+
+- CRC is based on binary division.
+
+![Alt text](detect15.jpg)
+
+**Hamming code**
+
+![Alt text](Hamming.png)
+
 **Network Layer – Layer 3**
 
 - It determines the best path to move data from source to the destination based on the network conditions, the priority of service, and other factors.
@@ -204,6 +268,7 @@ This layer is responsible for the establishment of connection, maintenance of se
 - Mail Services : Provide email service.
 
 - Directory Services
+
 
 
 ## TCP/IP Reference model
