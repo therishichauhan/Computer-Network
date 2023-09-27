@@ -30,6 +30,14 @@
 
 - ARP: ARP stands for Address Resolution Protocol. It is used to convert an IP address to its corresponding physical address(i.e., MAC Address). ARP is used by the Data Link Layer to identify the MAC address of the Receiver’s machine. 
 
+- Collision Domain : A Collision Domain is a scenario in which when a device sends out a message to the network, all other devices which are included in its collision domain have to pay attention to it, no matter if it was destined for them or not. This causes a problem because, in a situation where two devices send out their messages simultaneously, a collision will occur leading them to wait and re-transmit their respective messages, one at a time. Remember, it happens only in the case of a half-duplex mode.
+
+- Broadcast Domain : A Broadcast Domain is a scenario in which when a device sends out a broadcast message, all the devices present in its broadcast domain have to pay attention to it. This creates a lot of congestion in the network, commonly called LAN congestion, which affects the bandwidth of the users present in that network. 
+
+- HUB : A network hub is a node that broadcasts data to every computer connected to it.It is used to connect multiple devices in a network.
+
+- a **switch** connects multiple devices to create a network, a **router** connects multiple switches, and their respective networks, to form an even larger network
+
 **Types of Computer Network Architecture**
 
 - Client-Server Architecture:Nodes can be Servers or Clients. Here, the server node can manage the Client Node Behaviour.
@@ -407,6 +415,13 @@ S = 1/{a(1 + 1/N)} for a>1.
              a = Tp/Tt 
 (Tp = propagation delay and Tt = transmission delay)
 ```
+
+**Piggybacking**
+
+Piggybacking is a process of attaching acknowledgment with the data packet to be sent. 
+
+![Alt text](piggybacking.webp)
+
 
 ## Flow Control
 
