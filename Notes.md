@@ -92,7 +92,7 @@ This topological technology is the combination of all the various types of topol
 
 **What are the 7 layers of the OSI Model?**
 
-**Physical Layer – Layer 1**
+# Physical Layer – Layer 1
 
 - it is responsible for the actual physical connection between the devices.
 
@@ -113,7 +113,7 @@ Hub, Repeater, Modem, and Cables are Physical Layer devices.
 Network Layer, Data Link Layer, and Physical Layer are also known as Lower Layers or Hardware Layers.
 ```
 
-**Data Link Layer (DLL) – Layer 2**
+# Data Link Layer (DLL) – Layer 2
 
 - It defines the format of the data on the network.
 
@@ -212,7 +212,9 @@ Disadvantages
 **Hamming code**
 
 ![Alt text](Hamming.png)
-**Network Layer – Layer 3**
+
+
+# Network Layer – Layer 3
 
 - It determines the best path to move data from source to the destination based on the network conditions, the priority of service, and other factors.
 
@@ -262,7 +264,7 @@ This layer is responsible for the establishment of connection, maintenance of se
 
 - Compression: Reduces the number of bits that need to be transmitted on the network.
 
-**Application Layer – Layer 7**
+# Application Layer – Layer 7
 
 - This layer provides the network services to the end-users.
 
@@ -616,3 +618,58 @@ For each node v which is adjacent to u, update dist[v] as −
 
 ![Alt text](<Screenshot 2023-09-15 033041.png>)
 
+# Network Security
+
+**Cryptography**
+
+Cryptography is the process of encoding data to protect it from unauthorized access, maintain its privacy, and guarantee its secrecy
+
+- Symmetric Key Cryptography: It is an encryption system where the sender and receiver of message use a single common key to encrypt and decrypt messages.
+
+- Hash Functions:  A hash value with fixed length is calculated as per the plain text which makes it impossible for contents of plain text to be recovered
+
+- Asymmetric Key Cryptography: Under this system a pair of keys is used to encrypt and decrypt information. A receiver’s public key is used for encryption and a receiver’s private key is used for decryption. Public key and Private Key are different. 
+
+**Digital Signature**
+
+The Digital Signature is a technique which is used to validate the authenticity and integrity of the message
+
+- In Digital Signature, the private key is used for encryption while the public key is used for decryption.
+
+**How digital signatures work**
+
+- Select a file to be digitally signed.
+
+- The hash value of the message or file content is calculated. This message or file content is encrypted by using a private key of a sender to form the digital signature.
+
+- Now, the original message or file content along with the digital signature is transmitted.
+
+- The receiver decrypts the digital signature by using a public key of a sender.
+
+- The receiver now has the message or file content and can compute it.
+
+- Comparing these computed message or file content with the original computed message. The comparison needs to be the same for ensuring integrity.
+
+**Types of Digital Signature**
+
+- Certified Signatures : The certified digital signature documents display a unique blue ribbon across the top of the document. The certified signature contains the name of the document signer and the certificate issuer which indicate the authorship and authenticity of the document.
+
+- Approval Signatures : The approval digital signatures on a document can be used in the organization's business workflow.
+
+- Visible Digital Signature : The visible digital signature allows a user to sign a single document digitally. This signature appears on a document in the same way as signatures are signed on a physical document.
+
+- Invisible Digital Signature : The invisible digital signatures carry a visual indication of a blue ribbon within a document in the taskbar. 
+
+**Algorithms in Digital Signature**
+
+- Key generation algorithm
+
+The key generation algorithm selects private key randomly from a set of possible private keys. This algorithm provides the private key and its corresponding public key.
+
+-  Signing algorithm
+
+A signing algorithm produces a signature for the document.
+
+- Signature verifying algorithm
+
+A signature verifying algorithm either accepts or rejects the document's authenticity.
