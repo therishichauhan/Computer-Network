@@ -618,6 +618,226 @@ For each node v which is adjacent to u, update dist[v] as −
 
 ![Alt text](<Screenshot 2023-09-15 033041.png>)
 
+
+**Open Shortest Path First (OSPF) protocol States**
+
+-  it is a link-state routing protocol that is used to find the best path between the source and the destination router using its own Shortest Path First.
+
+**OSPF Terms:**
+
+Router ID: The highest active IP address on a router.
+
+Router Priority: An 8-bit value used to elect DR and BDR in a broadcast network.
+
+Designated Router (DR): Elected to minimize adjacencies; highest router priority becomes the DR.
+
+Backup Designated Router (BDR): Backup for DR; takes over when DR fails.
+
+Tiebreaker: If router priorities are tied, highest Router ID is considered, with loopback addresses taking precedence.
+
+**OSPF States:**
+
+Down: No hello packets received.
+
+Init: Hello packets received from the other router.
+
+2Way: Bidirectional connectivity established with hello 
+packets exchanged.
+
+Exstart: Master and slave selected based on Router IDs; master controls sequence of numbers.
+
+Exchange: Routers send LSAs to each other containing a database description.
+
+Loading: Exchange of LSR (Link State Request), LSU (Link State Update), and LSA.
+
+Full: Synchronization of all information; OSPF routing begins in this state.
+
+**How OSPF Works:**
+
+Neighbor Formation: Routers running OSPF on the same link become OSPF neighbors, creating a neighbor relationship.
+
+Database Information Exchange: OSPF routers exchange Link State Database (LSDB) information to understand network topology.
+
+Route Selection: After exchanging LSDBs, routers calculate the best route using the SPF algorithm (Shortest Path First) to populate their routing tables.
+
+
+
+**EIGRP (Enhanced Interior Gateway Routing Protocol)**
+
+- EIGRP is considered a hybrid routing protocol, combining elements of both distance-vector and link-state routing protocols.
+
+- EIGRP uses a composite metric that considers factors like bandwidth, delay, reliability, and load to determine the best path to a destination.
+
+- EIGRP routers establish neighbor relationships to exchange routing information, using multicast or unicast communication.
+
+- EIGRP excels at rapid network convergence, quickly adjusting to topology changes through mechanisms like the Diffusing Update Algorithm (DUAL).
+
+-  It's primarily associated with Cisco but can be used in non-Cisco environments with open-source implementations.
+
+**BGP**
+
+**Characteristics of BGP:**
+
+Inter-Autonomous System Configuration: BGP's primary role is to enable communication between different autonomous systems (ASes).
+
+Next-Hop Paradigm: BGP supports the concept of the next-hop router, determining the next router to forward traffic to reach a destination.
+
+Coordination within AS: BGP allows for coordination among multiple BGP speakers within the same AS.
+
+Path Information: BGP advertisements include path information in addition to destination reachability and next-hop details.
+
+Policy Support: BGP can implement routing policies configured by network administrators, distinguishing between internal and external routes.
+
+TCP Protocol: BGP runs over the TCP (Transmission Control Protocol), ensuring reliable and ordered delivery of routing updates.
+
+Network Bandwidth Conservation: BGP is designed to be efficient in terms of conserving network bandwidth by minimizing unnecessary updates.
+
+CIDR Support: BGP supports Classless Inter-Domain Routing (CIDR), allowing for efficient IP address allocation and routing.
+
+Security: BGP also incorporates security features and mechanisms to protect against routing attacks and unauthorized route advertisements.
+
+**Functionality of BGP:**
+
+Peer Acquisition and Authentication: BGP peers establish a TCP connection and perform authentication to ensure both sides agree to communicate.
+
+Reachability Information Exchange: BGP peers exchange reachability information, indicating which networks are reachable and how to reach them.
+
+Verification of Functionality: BGP performs checks to verify that peers and the network connections between them are functioning correctly.
+
+BGP Route Information Management Functions:
+
+Route Storage: Each BGP router stores information about how to reach various networks.
+
+Route Update: BGP routers use special techniques to determine when and how to update routes based on information received from peers.
+
+Route Selection: BGP routers select the best routes from their databases to reach specific networks.
+
+Route Advertisement: BGP routers regularly inform their peers about the networks they know about and how to reach them.
+
+**Difference between Connection-oriented and Connection-less Services**
+
+![Alt text](<Screenshot 2023-09-28 194531.png>)
+
+**TCP 3-Way Handshake Process**
+
+1. (SYN): In the first step, the client wants to establish a connection with a server, so it sends a segment with SYN(Synchronize Sequence Number) which informs the server that the client is likely to start communication and with what sequence number it starts segments with
+
+2. (SYN + ACK): Server responds to the client request with SYN-ACK signal bits set. Acknowledgement(ACK) signifies the response of the segment it received and SYN signifies with what sequence number it is likely to start the segments with
+
+
+3. (ACK): In the final part client acknowledges the response of the server and they both establish a reliable connection with which they will start the actual data transfer
+
+![Alt text](handshake-1.png)
+
+
+**Differences between TCP and UDP**
+
+
+![Alt text](<Screenshot 2023-09-28 195151.png>)
+
+
+**TCP (Transmission Control Protocol) Message Format**
+
+Source Port (16 bits): Specifies the port number of the sending process on the source device.
+
+Destination Port (16 bits): Specifies the port number of the receiving process on the destination device.
+
+Sequence Number (32 bits): Used to keep track of the order of transmitted data segments. It aids in reassembling data at the receiver's end.
+
+Acknowledgment Number (32 bits): Contains the sequence number of the next expected data segment. It acknowledges the receipt of data up to this point.
+
+Data Offset (4 bits): Indicates the length of the TCP header in 32-bit words. It helps locate the start of the data within the TCP segment.
+
+Reserved (6 bits): Reserved for future use and should be set to zero.
+
+Control Flags (6 bits): A set of flags that control various aspects of the TCP connection, including SYN (synchronize), ACK (acknowledge), PSH (push), RST (reset), and more.
+
+Window Size (16 bits): Specifies the size of the sender's receive window, indicating how much more data the sender can transmit before expecting acknowledgment.
+
+Checksum (16 bits): Used for error-checking to ensure the integrity of the TCP segment during transmission.
+
+Urgent Pointer (16 bits): Used in conjunction with the URG flag to indicate the offset from the sequence number where urgent data ends.
+
+Options (variable length): Optional fields that may include various control information such as Maximum Segment Size (MSS), Timestamps, and Window Scale.
+
+Padding (variable length): Added to align the header to a 32-bit boundary if necessary.
+
+Data: The actual application data being transmitted, with its length determined by the Data Offset field.
+
+**UDP (User Datagram Protocol) Message Format**
+
+Source Port (16 bits): Specifies the port number of the sending process on the source device.
+
+Destination Port (16 bits): Specifies the port number of the receiving process on the destination device.
+
+Length (16 bits): Indicates the total length of the UDP datagram, including the header and data.
+
+Checksum (16 bits): Used for optional error-checking, but it's often set to zero due to minimal UDP header overhead.
+
+Data: The actual application data being transmitted, with its length determined by the Length field.
+
+
+**Congestion Control**
+
+1. What is Congestion Control?
+
+Congestion control is a crucial network management technique aimed at preventing network congestion, which occurs when there's more data being transmitted than the network can handle efficiently.
+
+2. Causes of Congestion:
+
+Congestion can be caused by high data traffic, network bottlenecks, or misconfigured routers and switches.
+
+3. Congestion Control Mechanisms:
+
+Traffic Policing and Shaping: These techniques regulate the incoming traffic rate to prevent excessive data from entering the network.
+
+Quality of Service (QoS): Prioritizes and allocates bandwidth to critical applications.
+
+Flow Control: TCP uses flow control mechanisms to ensure that the sender does not overwhelm the receiver or the network with data.
+
+Queue Management: Routers and switches use queue management algorithms to decide which packets to forward during congestion.
+
+4. Importance of Congestion Control:
+
+Prevents network performance degradation.
+
+Ensures fair resource allocation among users.
+
+Avoids packet loss and retransmissions, improving efficiency.
+
+Quality of Service (QoS)
+
+1. What is Quality of Service (QoS)?
+
+Quality of Service is a set of techniques and mechanisms that ensure the network meets specific performance requirements for different types of traffic, applications, and users.
+
+2. Key Components of QoS:
+
+Traffic Classification: Identifying and categorizing different types of network traffic.
+
+Traffic Policing: Enforcing traffic policies to limit or control the flow of data.
+
+Traffic Shaping: Smoothing the flow of data to conform to desired traffic profiles.
+
+Prioritization: Assigning different levels of importance to various types of traffic.
+
+Resource Reservation: Allocating network resources (bandwidth, buffer space) for specific traffic types.
+Congestion Management: Managing network congestion by prioritizing traffic during congestion events.
+
+3. QoS in Action:
+
+QoS is crucial in networks where various applications (voice, video, data) compete for limited resources.
+
+It ensures that real-time applications like VoIP and video conferencing receive priority to maintain acceptable quality.
+
+QoS also helps in controlling latency, jitter, and packet loss, enhancing the user experience.
+
+4. Implementation of QoS:
+
+QoS policies are often implemented through network devices like routers and switches using techniques such as DiffServ (Differentiated Services) and IntServ (Integrated Services).
+
+Network administrators define QoS policies based on the specific requirements of the organization or network.
+
 # Network Security
 
 **Cryptography**
